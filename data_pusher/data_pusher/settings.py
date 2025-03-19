@@ -62,6 +62,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'data_pusher.urls'
 
+CORS_ALLOW_HEADERS = [
+    'content-type',
+    'authorization',
+    'CL-X-TOKEN',
+]
+
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (

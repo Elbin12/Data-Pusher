@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from rest_framework.exceptions import ValidationError
 from rest_framework import serializers
 
-from .models import Account
+from .models import Account, Destination
 
 
 class SignupSerializer(ModelSerializer):
@@ -37,7 +37,20 @@ class LoginSerializer(ModelSerializer):
         model = User
         fields = ['username', 'email', 'password']
 
+class DestinationSerializer(ModelSerializer):
+    class Meta:
+        model = Destination
+        fields = '__all__'
+
 class AccountSerializer(ModelSerializer):
+    destinations = DestinationSerializer(many=True, read_only=True)
     class Meta:
         model = Account
         fields = '__all__'
+
+    def validate(self, validated_data):
+        name = validated_data.get('name')
+        if Account.objects.filter(name=name).exclude(id=self.instance.id if self.instance else None).exists():
+            raise ValidationError({'name': 'An account with this name already exists.'})
+        return validated_data
+

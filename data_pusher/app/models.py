@@ -10,7 +10,15 @@ class Account(models.Model):
     website = models.URLField(blank=True, null=True)
 
 class Destination(models.Model):
-    account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='destinations')
     url = models.URLField()
     http_method = models.CharField(max_length=10, choices=[('GET', 'GET'), ('POST', 'POST'), ('PUT', 'PUT')])
     headers = models.JSONField(default=dict, blank=True, null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['account', 'url', 'http_method'], 
+                name='unique_account_url_method'
+            )
+        ]
