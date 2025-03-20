@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['data-pusher-frontend.elbin.live', 'localhost']
+ALLOWED_HOSTS = ['data-pusher-frontend.elbin.live', 'data-pusher.elbin.live', 'localhost']
 
 
 # Application definition
