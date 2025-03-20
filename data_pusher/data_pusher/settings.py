@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['data-pusher-frontend.elbin.live', 'localhost']
 
 
 # Application definition
@@ -73,6 +73,9 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
   'http://localhost:3000',
   'http://127.0.0.1:3000',
+
+  'https://data-pusher-frontend.elbin.live',
+  'https://www.data-pusher-frontend.elbin.site',
 )
 
 TEMPLATES = [
